@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='min' Clean='clean' />
+﻿/// <binding BeforeBuild='restore, min' Clean='clean' />
 "use strict";
 
 var gulp = require("gulp"),
@@ -17,6 +17,7 @@ paths.css = paths.webroot + "css/**/*.css";
 paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
+paths.lib = paths.webroot + "lib/";
 
 gulp.task("clean:js", function (cb) {
     rimraf(paths.concatJsDest, cb);
@@ -43,3 +44,11 @@ gulp.task("min:css", function () {
 });
 
 gulp.task("min", ["min:js", "min:css"]);
+
+gulp.task('restore:jquery', function () {
+    gulp.src([
+        'node_modules/jquery/dist/**/*.*'
+    ]).pipe(gulp.dest(paths.lib + 'jquery'));
+});
+
+gulp.task('restore', ['restore:jquery']);

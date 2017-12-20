@@ -1,1 +1,2 @@
-﻿document.write(jQuery.fn.jquery);
+﻿document.write("Hello from JavaScript!");
+document.write(jQuery.fn.jquery);
